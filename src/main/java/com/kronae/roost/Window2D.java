@@ -236,7 +236,7 @@ public class Window2D implements Window {
                 System.out.println("Roost: ShutdownHook: Program is closing.");
             } else if(windowStatus == WindowStatus.OPEN) {
                 System.out.println("Roost: ShutdownHook: Program is UNEXPECTED closing.");
-                close(false, CloseType.UNEXPECTED);
+                closeUnexpected();
                 System.out.println("Roost: ShutdownHook: Program is UNEXPECTED closed.");
             }
         }));
@@ -319,6 +319,23 @@ public class Window2D implements Window {
         print("Window2D: close(): Closed.");
 
         return windowStatus == WindowStatus.CLOSE;
+    }
+
+    /**
+     * Close unexpected.
+     */
+    public void closeUnexpected() {
+        windowStatus = WindowStatus.LOADING;
+        for (int i = 0; i < scripts.toArray().length; i++) {
+            scripts.get(i).closeQueue();
+        }
+        print("Window2D: close(): Executing close script...");
+        for (int i = 0; i < scripts.toArray().length; i++) {
+            scripts.get(i).close(CloseType.UNEXPECTED);
+        }
+        timer.cancel();
+        timer.purge();
+        windowStatus = WindowStatus.CLOSE;
     }
     /**
      * Close the window
