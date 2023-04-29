@@ -1,6 +1,6 @@
 package com.kronae.roost.exception;
 
-public class AlreadyOpenException extends Exception {
+public class AlreadyOpenException extends RoostRuntimeException {
     public AlreadyOpenException() {
         super();
     }

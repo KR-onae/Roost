@@ -1,7 +1,5 @@
 package com.kronae.roost.structure;
 
-import com.kronae.roost.custom.RoostStructure;
-
 public class SquareStructure implements RoostStructure {
     private int lx;
     private int ly;

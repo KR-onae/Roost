@@ -1,4 +1,4 @@
 package com.kronae.roost;
 
-public interface Window {
+public interface  Window {
 }
